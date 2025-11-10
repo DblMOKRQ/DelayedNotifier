@@ -40,7 +40,7 @@ func main() {
 	}
 	defer publish.Close()
 
-	repo, err := repository.NewRepository(cfg.GetString("master_dsn"), []string{}, log)
+	repo, err := repository.NewRepository(cfg.GetString("master_dsn"), cfg.GetStringSlice("slaveDSNs"), log)
 	if err != nil {
 		log.Fatal("Failed to create repository", zap.Error(err))
 	}
