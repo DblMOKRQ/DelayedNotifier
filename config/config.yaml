@@ -3,6 +3,7 @@ amqp_server_url: "amqp://guest:guest@localhost:5672"
 exchange: ""
 log_level: "debug"
 master_dsn: ""
+slaveDSNs: []
 max_attempts: 5
 work_queue: "notifications.work_queue"
 delayed_exchange: "notifications.delayed"
