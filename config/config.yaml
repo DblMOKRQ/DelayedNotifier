@@ -1,0 +1,10 @@
+addr: "localhost:8080"
+amqp_server_url: "amqp://guest:guest@localhost:5672"
+exchange: ""
+log_level: "debug"
+master_dsn: ""
+max_attempts: 5
+work_queue: "notifications.work_queue"
+delayed_exchange: "notifications.delayed"
+work_routing_key: "work"
+bot_token: ""
