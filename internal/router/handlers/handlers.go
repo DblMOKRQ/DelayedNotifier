@@ -32,11 +32,11 @@ func (h *HandlersNotifier) CreateNotify(c *ginext.Context) {
 		return
 	}
 
-	//if err := notification.Validate(); err != nil {
-	//	log.Error("Failed to validate notification", zap.Error(err))
-	//	c.JSON(http.StatusBadRequest, ginext.H{"error": err.Error()})
-	//	return
-	//}
+	if err := notification.Validate(); err != nil {
+		log.Error("Failed to validate notification", zap.Error(err))
+		c.JSON(http.StatusBadRequest, ginext.H{"error": err.Error()})
+		return
+	}
 
 	id, err := h.serviceNotifier.Create(c.Request.Context(), *notification)
 	if err != nil {
