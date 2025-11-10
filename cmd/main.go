@@ -20,7 +20,6 @@ import (
 )
 
 func main() {
-	// --- 1. Инициализация (как и было) ---
 	cfg := config.New()
 	_ = cfg.LoadConfigFiles("./config/config.yaml")
 	log, err := logger.NewLogger(cfg.GetString("log_level"))
@@ -57,14 +56,14 @@ func main() {
 
 	handlerNotifier := handlers.NewHandlersNotifier(serviceNotifier)
 
-	// --- 3. Запуск консьюмера в отдельной горутине ---
+	// --- 1. Запуск консьюмера в отдельной горутине ---
 	go func() {
 		log.Info("Starting consumer...")
 		cons.StartListening(ctx, cfg.GetInt("max_attempts"))
 		log.Info("Consumer stopped.")
 	}()
 
-	// --- 4. Настройка и запуск HTTP-сервера ---
+	// --- 2. Настройка и запуск HTTP-сервера ---
 	rout := router.NewRouter(cfg.GetString("log_level"), handlerNotifier, log)
 	srv := &http.Server{
 		Addr:    cfg.GetString("addr"),
